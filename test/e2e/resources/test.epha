@@ -1,0 +1,45 @@
+// Import standard Kubernetes resources
+from kubernetes import Deployment, Service
+// Helm integration
+import helm
+
+// Define a deployment for an application
+app_deployment = Deployment {
+    name: "my-app",
+    replicas: 3,
+    template: {
+        metadata: {
+            labels: {
+                app: "my-app"
+            }
+        },
+        spec: {
+            containers: [{
+                name: "my-app",
+                image: "my-app-image:latest",
+                ports: [{ containerPort: 80 }]
+            }]
+        }
+    }
+}
+
+// Define a service for the application
+app_service = Service {
+    name: "my-app",
+    type: "LoadBalancer",
+    ports: [{
+        port: 80,
+        targetPort: 80
+    }],
+    selector: {
+        app: "my-app"
+    }
+}
+
+
+// Helm chart details
+chart = helm.chart {
+    name: "my-app-chart",
+    version: "1.0.0",
+    resources: [app_deployment, app_service]
+}
