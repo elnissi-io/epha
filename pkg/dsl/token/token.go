@@ -2,6 +2,11 @@ package token
 
 type TokenType string
 
+type Token struct {
+    Type    TokenType
+    Literal string
+}
+
 const (
     EOF         TokenType = "EOF"
     Identifier  TokenType = "IDENTIFIER"
@@ -18,10 +23,8 @@ const (
     RBrace      TokenType = "}"
     Comma       TokenType = ","
     Illegal     TokenType = "ILLEGAL"
-	Colon 		TokenType = ":"
+    Colon       TokenType = ":"
+    Number      TokenType = "NUMBER"    // Added
+    Boolean     TokenType = "BOOLEAN"   // Added
+    LBracket    TokenType = "["         // Added
 )
-
-type Token struct {
-    Type    TokenType
-    Literal string
-}

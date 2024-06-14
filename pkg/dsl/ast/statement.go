@@ -3,11 +3,10 @@ package ast
 import "epha/pkg/dsl/token"
 
 type Statement interface {
-	Node
-	statementNode()
-	String() string // Define the String() method for Statement
+    Node
+    statementNode()
+    String() string
 }
-
 // Represents import statements
 type ImportStatement struct {
 	Token   token.Token   // The 'import' or 'from' token

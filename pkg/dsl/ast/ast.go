@@ -2,6 +2,8 @@ package ast
 
 import "epha/pkg/dsl/token"
 
+
+
 type Node interface {
 	TokenLiteral() string
 }
@@ -18,14 +20,7 @@ type Program struct {
 
 // Represents variable declarations
 type VariableDeclaration struct {
-	Token token.Token // The token.IDENTIFIER token
+	Token  token.Token
 	Name  *Identifier // The variable name
 	Value Expression  // The value/expression assigned to the variable
-}
-
-// Function calls like k8s.service(...)
-type CallExpression struct {
-	Token     token.Token // The '(' token
-	Function  *Identifier // The callee, e.g., k8s.service
-	Arguments []Expression
 }

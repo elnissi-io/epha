@@ -60,48 +60,45 @@ func generateYAMLForVariableDeclaration(vd *ast.VariableDeclaration) (string, er
 }
 
 func generateYAMLForExpression(expr ast.Expression) (string, error) {
-	switch e := expr.(type) {
+	switch v := expr.(type) {
 	case *ast.StringLiteral:
-		return fmt.Sprintf("\"%s\"", e.Value), nil
+		return fmt.Sprintf("\"%s\"", v.Value), nil
 	case *ast.IntegerLiteral:
-		return fmt.Sprintf("%d", e.Value), nil
+		return fmt.Sprintf("%d", v.Value), nil
 	case *ast.BooleanLiteral:
-		return fmt.Sprintf("%t", e.Value), nil
-	case *ast.HashLiteral:
-		var pairs []string
-		for key, value := range e.Pairs {
-			keyYAML, err := generateYAMLForExpression(key)
-			if err != nil {
-				return "", err
-			}
-			valueYAML, err := generateYAMLForExpression(value)
-			if err != nil {
-				return "", err
-			}
-			pairs = append(pairs, fmt.Sprintf("%s: %s", keyYAML, valueYAML))
-		}
-		return "{\n" + indent(strings.Join(pairs, "\n"), 2) + "\n}", nil
+		return fmt.Sprintf("%v", v.Value), nil
+	case *ast.Identifier:
+		return v.Value, nil
 	case *ast.ArrayLiteral:
-		var elements []string
-		for _, elem := range e.Elements {
-			elemYAML, err := generateYAMLForExpression(elem)
+		var buf bytes.Buffer
+		for _, elem := range v.Elements {
+			yamlElem, err := generateYAMLForExpression(elem)
 			if err != nil {
 				return "", err
 			}
-			elements = append(elements, "- "+elemYAML)
+			buf.WriteString("- " + yamlElem + "\n")
 		}
-		return strings.Join(elements, "\n"), nil
-	default:
-		return "", fmt.Errorf("unsupported expression type in YAML generation")
+		return buf.String(), nil
+	case *ast.HashLiteral:
+		var buf bytes.Buffer
+		for key, value := range v.Pairs {
+			yamlKey, err := generateYAMLForExpression(key)
+			if err != nil {
+				return "", err
+			}
+			yamlValue, err := generateYAMLForExpression(value)
+			if err != nil {
+				return "", err
+			}
+			buf.WriteString(fmt.Sprintf("%s: %s\n", yamlKey, yamlValue))
+		}
+		return buf.String(), nil
 	}
+
+	return "", fmt.Errorf("unsupported expression type: %T", expr)
 }
 
 func indent(s string, spaces int) string {
-	lines := strings.Split(s, "\n")
-	indentedLines := make([]string, len(lines))
 	indentation := strings.Repeat(" ", spaces)
-	for i, line := range lines {
-		indentedLines[i] = indentation + line
-	}
-	return strings.Join(indentedLines, "\n")
+	return indentation + strings.Replace(s, "\n", "\n"+indentation, -1)
 }

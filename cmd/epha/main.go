@@ -1,29 +1,17 @@
 package main
 
 import (
-	"epha/pkg/generator"
-	"epha/pkg/listener"
-	"epha/pkg/parser"
 	"fmt"
+	"os"
 
-	"github.com/antlr4-go/antlr/v4"
+	"github.com/spf13/cobra"
 )
 
 func main() {
-	input := antlr.NewInputStream(`import k8s from "kubernetes" import deployment, service`)
-	lexer := parser.NewEphaLexer(input)
-	stream := antlr.NewCommonTokenStream(lexer, antlr.TokenDefaultChannel)
-	p := parser.NewEphaParser(stream)
-
-	listener := listener.NewEphaListener()
-	antlr.ParseTreeWalkerDefault.Walk(listener, p.Program())
-
-	program := listener.GetProgram()
-
-	yaml, err := generator.GenerateYAML(program)
-	if err != nil {
-		fmt.Println("Error generating YAML:", err)
-	} else {
-		fmt.Println("Generated YAML:\n", yaml)
+	rootCmd := &cobra.Command{Use: "epha"}
+	rootCmd.AddCommand(renderCmd())
+	if err := rootCmd.Execute(); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
 	}
 }

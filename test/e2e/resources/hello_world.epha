@@ -1,0 +1,13 @@
+myVar = "Hello, World!"
+helm my_chart {
+  version: "1.0"
+  repo: "stable"
+}
+
+k8s my_resource {
+  kind: "Pod"
+  metadata: {
+    name: "my-pod"
+    namespace: "default"
+  }
+}
