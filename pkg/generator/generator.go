@@ -4,101 +4,81 @@ import (
 	"bytes"
 	"epha/pkg/dsl/ast"
 	"fmt"
-	"strings"
+
+	v1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
+	"sigs.k8s.io/yaml"
 )
 
-// GenerateYAML transforms an entire AST (represented by ast.Program) into a YAML string.
-func GenerateYAML(program *ast.Program) (string, error) {
-	var buf bytes.Buffer
-
-	for _, stmt := range program.Statements {
-		switch s := stmt.(type) {
-		case *ast.ImportStatement:
-			// Handle imports if needed
-		case *ast.AssignmentStatement:
-			yaml, err := generateYAMLForAssignment(s)
-			if err != nil {
-				return "", err
-			}
-			buf.WriteString(yaml + "\n\n")
-		case *ast.VariableDeclaration:
-			yaml, err := generateYAMLForVariableDeclaration(s)
-			if err != nil {
-				return "", err
-			}
-			buf.WriteString(yaml + "\n\n")
-		}
-	}
-
-	return buf.String(), nil
+type Generator struct {
+	program *ast.Program
+	crds    []*v1.CustomResourceDefinition
 }
 
-func generateYAMLForAssignment(as *ast.AssignmentStatement) (string, error) {
-	var buf bytes.Buffer
+func NewGenerator(program *ast.Program, crds []*v1.CustomResourceDefinition) *Generator {
+	return &Generator{program: program, crds: crds}
+}
 
-	buf.WriteString(as.Name.Value + ":\n")
-	yamlValue, err := generateYAMLForExpression(as.Value)
+func (g *Generator) Generate() (string, error) {
+	var output bytes.Buffer
+
+	for _, stmt := range g.program.Statements {
+		resource := stmt.(*ast.Resource)
+		yamlString, err := g.generateResource(resource)
+		if err != nil {
+			return "", err
+		}
+		output.WriteString(yamlString + "\n---\n")
+	}
+
+	return output.String(), nil
+}
+
+func (g *Generator) generateResource(resource *ast.Resource) (string, error) {
+	crd := g.getCRDForResource(resource.Type)
+	if crd == nil {
+		return "", fmt.Errorf("CRD not found for resource: %s", resource.Type)
+	}
+
+	k8sResource := map[string]interface{}{
+		"apiVersion": crd.Spec.Group + "/" + crd.Spec.Versions[0].Name,
+		"kind":       crd.Spec.Names.Kind,
+		"metadata": map[string]interface{}{
+			"name": resource.Name,
+		},
+		"spec": g.buildSpec(resource.Properties),
+	}
+
+	yamlData, err := yaml.Marshal(k8sResource)
 	if err != nil {
 		return "", err
 	}
-	buf.WriteString(indent(yamlValue, 2))
 
-	return buf.String(), nil
+	return string(yamlData), nil
 }
 
-func generateYAMLForVariableDeclaration(vd *ast.VariableDeclaration) (string, error) {
-	var buf bytes.Buffer
-
-	buf.WriteString(vd.Name.Value + ":\n")
-	yamlValue, err := generateYAMLForExpression(vd.Value)
-	if err != nil {
-		return "", err
-	}
-	buf.WriteString(indent(yamlValue, 2))
-
-	return buf.String(), nil
-}
-
-func generateYAMLForExpression(expr ast.Expression) (string, error) {
-	switch v := expr.(type) {
-	case *ast.StringLiteral:
-		return fmt.Sprintf("\"%s\"", v.Value), nil
-	case *ast.IntegerLiteral:
-		return fmt.Sprintf("%d", v.Value), nil
-	case *ast.BooleanLiteral:
-		return fmt.Sprintf("%v", v.Value), nil
-	case *ast.Identifier:
-		return v.Value, nil
-	case *ast.ArrayLiteral:
-		var buf bytes.Buffer
-		for _, elem := range v.Elements {
-			yamlElem, err := generateYAMLForExpression(elem)
-			if err != nil {
-				return "", err
+func (g *Generator) buildSpec(properties []*ast.Property) map[string]interface{} {
+	spec := make(map[string]interface{})
+	for _, prop := range properties {
+		if len(prop.Values) > 0 {
+			var values []interface{}
+			for _, val := range prop.Values {
+				values = append(values, val.Value)
 			}
-			buf.WriteString("- " + yamlElem + "\n")
+			spec[prop.Name] = values
+		} else if len(prop.SubProps) > 0 {
+			spec[prop.Name] = g.buildSpec(prop.SubProps)
+		} else {
+			spec[prop.Name] = prop.Value.Value
 		}
-		return buf.String(), nil
-	case *ast.HashLiteral:
-		var buf bytes.Buffer
-		for key, value := range v.Pairs {
-			yamlKey, err := generateYAMLForExpression(key)
-			if err != nil {
-				return "", err
-			}
-			yamlValue, err := generateYAMLForExpression(value)
-			if err != nil {
-				return "", err
-			}
-			buf.WriteString(fmt.Sprintf("%s: %s\n", yamlKey, yamlValue))
-		}
-		return buf.String(), nil
 	}
-
-	return "", fmt.Errorf("unsupported expression type: %T", expr)
+	return spec
 }
 
-func indent(s string, spaces int) string {
-	indentation := strings.Repeat(" ", spaces)
-	return indentation + strings.Replace(s, "\n", "\n"+indentation, -1)
+func (g *Generator) getCRDForResource(name string) *v1.CustomResourceDefinition {
+	for _, crd := range g.crds {
+		if crd.Spec.Names.Kind == name {
+			return crd
+		}
+	}
+	return nil
 }

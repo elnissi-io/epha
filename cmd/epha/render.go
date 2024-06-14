@@ -10,6 +10,7 @@ import (
 
 	"github.com/antlr4-go/antlr/v4"
 	"github.com/spf13/cobra"
+	v1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 )
 
 func renderCmd() *cobra.Command {
@@ -30,12 +31,15 @@ func renderCmd() *cobra.Command {
 			stream := antlr.NewCommonTokenStream(lexer, antlr.TokenDefaultChannel)
 			p := parser.NewEphaParser(stream)
 
-			listener := listener.NewEphaListener()
+			// Pass an empty slice of CustomResourceDefinition for now
+			crds := []*v1.CustomResourceDefinition{}
+			listener := listener.NewEphaListener(crds)
 			antlr.ParseTreeWalkerDefault.Walk(listener, p.Program())
 
 			program := listener.GetProgram()
 
-			yaml, err := generator.GenerateYAML(program)
+			gen := generator.NewGenerator(program, crds)
+			yaml, err := gen.Generate()
 			if err != nil {
 				fmt.Printf("Error generating YAML: %v\n", err)
 				os.Exit(1)
@@ -45,3 +49,4 @@ func renderCmd() *cobra.Command {
 		},
 	}
 }
+

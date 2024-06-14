@@ -32,56 +32,44 @@ func (s *BaseEphaListener) EnterStatement(ctx *StatementContext) {}
 // ExitStatement is called when production statement is exited.
 func (s *BaseEphaListener) ExitStatement(ctx *StatementContext) {}
 
-// EnterImportStmt is called when production importStmt is entered.
-func (s *BaseEphaListener) EnterImportStmt(ctx *ImportStmtContext) {}
+// EnterResourceDefinition is called when production resourceDefinition is entered.
+func (s *BaseEphaListener) EnterResourceDefinition(ctx *ResourceDefinitionContext) {}
 
-// ExitImportStmt is called when production importStmt is exited.
-func (s *BaseEphaListener) ExitImportStmt(ctx *ImportStmtContext) {}
+// ExitResourceDefinition is called when production resourceDefinition is exited.
+func (s *BaseEphaListener) ExitResourceDefinition(ctx *ResourceDefinitionContext) {}
 
-// EnterVariableDecl is called when production variableDecl is entered.
-func (s *BaseEphaListener) EnterVariableDecl(ctx *VariableDeclContext) {}
+// EnterResourceBody is called when production resourceBody is entered.
+func (s *BaseEphaListener) EnterResourceBody(ctx *ResourceBodyContext) {}
 
-// ExitVariableDecl is called when production variableDecl is exited.
-func (s *BaseEphaListener) ExitVariableDecl(ctx *VariableDeclContext) {}
+// ExitResourceBody is called when production resourceBody is exited.
+func (s *BaseEphaListener) ExitResourceBody(ctx *ResourceBodyContext) {}
 
-// EnterHelmChart is called when production helmChart is entered.
-func (s *BaseEphaListener) EnterHelmChart(ctx *HelmChartContext) {}
+// EnterResourceProperty is called when production resourceProperty is entered.
+func (s *BaseEphaListener) EnterResourceProperty(ctx *ResourcePropertyContext) {}
 
-// ExitHelmChart is called when production helmChart is exited.
-func (s *BaseEphaListener) ExitHelmChart(ctx *HelmChartContext) {}
+// ExitResourceProperty is called when production resourceProperty is exited.
+func (s *BaseEphaListener) ExitResourceProperty(ctx *ResourcePropertyContext) {}
 
-// EnterK8sResource is called when production k8sResource is entered.
-func (s *BaseEphaListener) EnterK8sResource(ctx *K8sResourceContext) {}
+// EnterResourcePropertyBody is called when production resourcePropertyBody is entered.
+func (s *BaseEphaListener) EnterResourcePropertyBody(ctx *ResourcePropertyBodyContext) {}
 
-// ExitK8sResource is called when production k8sResource is exited.
-func (s *BaseEphaListener) ExitK8sResource(ctx *K8sResourceContext) {}
+// ExitResourcePropertyBody is called when production resourcePropertyBody is exited.
+func (s *BaseEphaListener) ExitResourcePropertyBody(ctx *ResourcePropertyBodyContext) {}
 
-// EnterHelmStmt is called when production helmStmt is entered.
-func (s *BaseEphaListener) EnterHelmStmt(ctx *HelmStmtContext) {}
+// EnterPropertyKey is called when production propertyKey is entered.
+func (s *BaseEphaListener) EnterPropertyKey(ctx *PropertyKeyContext) {}
 
-// ExitHelmStmt is called when production helmStmt is exited.
-func (s *BaseEphaListener) ExitHelmStmt(ctx *HelmStmtContext) {}
+// ExitPropertyKey is called when production propertyKey is exited.
+func (s *BaseEphaListener) ExitPropertyKey(ctx *PropertyKeyContext) {}
 
-// EnterK8sStmt is called when production k8sStmt is entered.
-func (s *BaseEphaListener) EnterK8sStmt(ctx *K8sStmtContext) {}
+// EnterValue is called when production value is entered.
+func (s *BaseEphaListener) EnterValue(ctx *ValueContext) {}
 
-// ExitK8sStmt is called when production k8sStmt is exited.
-func (s *BaseEphaListener) ExitK8sStmt(ctx *K8sStmtContext) {}
+// ExitValue is called when production value is exited.
+func (s *BaseEphaListener) ExitValue(ctx *ValueContext) {}
 
-// EnterExpression is called when production expression is entered.
-func (s *BaseEphaListener) EnterExpression(ctx *ExpressionContext) {}
+// EnterValueList is called when production valueList is entered.
+func (s *BaseEphaListener) EnterValueList(ctx *ValueListContext) {}
 
-// ExitExpression is called when production expression is exited.
-func (s *BaseEphaListener) ExitExpression(ctx *ExpressionContext) {}
-
-// EnterArrayLiteral is called when production arrayLiteral is entered.
-func (s *BaseEphaListener) EnterArrayLiteral(ctx *ArrayLiteralContext) {}
-
-// ExitArrayLiteral is called when production arrayLiteral is exited.
-func (s *BaseEphaListener) ExitArrayLiteral(ctx *ArrayLiteralContext) {}
-
-// EnterHashLiteral is called when production hashLiteral is entered.
-func (s *BaseEphaListener) EnterHashLiteral(ctx *HashLiteralContext) {}
-
-// ExitHashLiteral is called when production hashLiteral is exited.
-func (s *BaseEphaListener) ExitHashLiteral(ctx *HashLiteralContext) {}
+// ExitValueList is called when production valueList is exited.
+func (s *BaseEphaListener) ExitValueList(ctx *ValueListContext) {}

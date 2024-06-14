@@ -1,13 +1,67 @@
-myVar = "Hello, World!"
-helm my_chart {
-  version: "1.0"
-  repo: "stable"
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: my-pod
+#   labels:
+#     app: my-app
+# spec:
+#   containers:
+#   - name: my-container
+#     image: nginx:latest
+#     ports:
+#     - containerPort: 80
+#     resources:
+#       requests:
+#         memory: "64Mi"
+#         cpu: "250m"
+#       limits:
+#         memory: "128Mi"
+#         cpu: "500m"
+import k8s
+
+Pod my-pod {
+
+    labels["app"] = "my-app" # define new label
+
+    Container my-container {}
+    # Define my-container properties
+    my-container.image = "nginx:latest"
+    my-container.ports = [80]
+    my-container.resources.requests.memory = "64Mi"
+    my-container.resources.requests.cpu = "250m"
+    my-container.resources.limits.memory = "128Mi"
+    my-container.resources.limits.cpu = "500m"
+    # set my-pod containers
+    containers = [my-container]
 }
 
-k8s my_resource {
-  kind: "Pod"
-  metadata: {
-    name: "my-pod"
-    namespace: "default"
-  }
+Pod my-other-pod {
+
+    labels["app"] = "my-app" # define new label
+
+    Container my-container {
+        image = "nginx:latest"
+        ports = [80]
+        resources.requests.memory = "64Mi"
+        resources.requests.cpu = "250m"
+        resources.limits.memory = "128Mi"
+        resources.limits.cpu = "500m"
+    }
+    containers = [my-container]
+}
+
+Pod my-third-pod {
+
+    labels["app"] = "my-app" # define new label
+
+    containers = [
+        Container my-container {
+            image = "nginx:latest"
+            ports = [80]
+            resources.requests.memory = "64Mi"
+            resources.requests.cpu = "250m"
+            resources.limits.memory = "128Mi"
+            resources.limits.cpu = "500m"
+        }
+    ]
 }

@@ -13,32 +13,26 @@ type EphaListener interface {
 	// EnterStatement is called when entering the statement production.
 	EnterStatement(c *StatementContext)
 
-	// EnterImportStmt is called when entering the importStmt production.
-	EnterImportStmt(c *ImportStmtContext)
+	// EnterResourceDefinition is called when entering the resourceDefinition production.
+	EnterResourceDefinition(c *ResourceDefinitionContext)
 
-	// EnterVariableDecl is called when entering the variableDecl production.
-	EnterVariableDecl(c *VariableDeclContext)
+	// EnterResourceBody is called when entering the resourceBody production.
+	EnterResourceBody(c *ResourceBodyContext)
 
-	// EnterHelmChart is called when entering the helmChart production.
-	EnterHelmChart(c *HelmChartContext)
+	// EnterResourceProperty is called when entering the resourceProperty production.
+	EnterResourceProperty(c *ResourcePropertyContext)
 
-	// EnterK8sResource is called when entering the k8sResource production.
-	EnterK8sResource(c *K8sResourceContext)
+	// EnterResourcePropertyBody is called when entering the resourcePropertyBody production.
+	EnterResourcePropertyBody(c *ResourcePropertyBodyContext)
 
-	// EnterHelmStmt is called when entering the helmStmt production.
-	EnterHelmStmt(c *HelmStmtContext)
+	// EnterPropertyKey is called when entering the propertyKey production.
+	EnterPropertyKey(c *PropertyKeyContext)
 
-	// EnterK8sStmt is called when entering the k8sStmt production.
-	EnterK8sStmt(c *K8sStmtContext)
+	// EnterValue is called when entering the value production.
+	EnterValue(c *ValueContext)
 
-	// EnterExpression is called when entering the expression production.
-	EnterExpression(c *ExpressionContext)
-
-	// EnterArrayLiteral is called when entering the arrayLiteral production.
-	EnterArrayLiteral(c *ArrayLiteralContext)
-
-	// EnterHashLiteral is called when entering the hashLiteral production.
-	EnterHashLiteral(c *HashLiteralContext)
+	// EnterValueList is called when entering the valueList production.
+	EnterValueList(c *ValueListContext)
 
 	// ExitProgram is called when exiting the program production.
 	ExitProgram(c *ProgramContext)
@@ -46,30 +40,24 @@ type EphaListener interface {
 	// ExitStatement is called when exiting the statement production.
 	ExitStatement(c *StatementContext)
 
-	// ExitImportStmt is called when exiting the importStmt production.
-	ExitImportStmt(c *ImportStmtContext)
+	// ExitResourceDefinition is called when exiting the resourceDefinition production.
+	ExitResourceDefinition(c *ResourceDefinitionContext)
 
-	// ExitVariableDecl is called when exiting the variableDecl production.
-	ExitVariableDecl(c *VariableDeclContext)
+	// ExitResourceBody is called when exiting the resourceBody production.
+	ExitResourceBody(c *ResourceBodyContext)
 
-	// ExitHelmChart is called when exiting the helmChart production.
-	ExitHelmChart(c *HelmChartContext)
+	// ExitResourceProperty is called when exiting the resourceProperty production.
+	ExitResourceProperty(c *ResourcePropertyContext)
 
-	// ExitK8sResource is called when exiting the k8sResource production.
-	ExitK8sResource(c *K8sResourceContext)
+	// ExitResourcePropertyBody is called when exiting the resourcePropertyBody production.
+	ExitResourcePropertyBody(c *ResourcePropertyBodyContext)
 
-	// ExitHelmStmt is called when exiting the helmStmt production.
-	ExitHelmStmt(c *HelmStmtContext)
+	// ExitPropertyKey is called when exiting the propertyKey production.
+	ExitPropertyKey(c *PropertyKeyContext)
 
-	// ExitK8sStmt is called when exiting the k8sStmt production.
-	ExitK8sStmt(c *K8sStmtContext)
+	// ExitValue is called when exiting the value production.
+	ExitValue(c *ValueContext)
 
-	// ExitExpression is called when exiting the expression production.
-	ExitExpression(c *ExpressionContext)
-
-	// ExitArrayLiteral is called when exiting the arrayLiteral production.
-	ExitArrayLiteral(c *ArrayLiteralContext)
-
-	// ExitHashLiteral is called when exiting the hashLiteral production.
-	ExitHashLiteral(c *HashLiteralContext)
+	// ExitValueList is called when exiting the valueList production.
+	ExitValueList(c *ValueListContext)
 }

@@ -1,20 +1,59 @@
 grammar Epha;
 
-program     : statement* EOF;
-statement   : importStmt | variableDecl | helmChart | k8sResource ;
-importStmt  : 'import' IDENTIFIER ('from' IDENTIFIER ('import' IDENTIFIER (',' IDENTIFIER)* )?)? ;
-variableDecl: IDENTIFIER '=' expression;
-helmChart   : 'helm' IDENTIFIER '{' helmStmt* '}';
-k8sResource : 'k8s' IDENTIFIER '{' k8sStmt* '}';
-helmStmt    : IDENTIFIER ':' expression;
-k8sStmt     : IDENTIFIER ':' expression;
+program : statement+ ;
 
-expression  : STRING | NUMBER | BOOLEAN | IDENTIFIER | arrayLiteral | hashLiteral;
-arrayLiteral: '[' expression (',' expression)* ']';
-hashLiteral : '{' (expression ':' expression) (',' expression ':' expression)* '}';
+statement
+    : resourceDefinition
+    ;
 
-IDENTIFIER  : [a-zA-Z_][a-zA-Z_0-9]*;
-STRING      : '"' .*? '"';
-NUMBER      : [0-9]+;
-BOOLEAN     : 'true' | 'false';
-WS          : [ \t\r\n]+ -> skip;
+resourceDefinition
+    : IDENTIFIER IDENTIFIER '{' resourceBody '}'
+    ;
+
+resourceBody
+    : resourceProperty*
+    ;
+
+resourceProperty
+    : propertyKey '=' value
+    | propertyKey '[' valueList ']'
+    | propertyKey '{' resourcePropertyBody '}'
+    ;
+
+resourcePropertyBody
+    : resourceProperty*
+    ;
+
+propertyKey
+    : IDENTIFIER ('.' IDENTIFIER)*
+    ;
+
+value
+    : STRING
+    | NUMBER
+    ;
+
+valueList
+    : value (',' value)*
+    ;
+
+IDENTIFIER
+    : [a-zA-Z_] [a-zA-Z_0-9]*
+    ;
+
+STRING
+    : '"' (~["\\] | '\\' .)* '"'
+    ;
+
+NUMBER
+    : [0-9]+ ('.' [0-9]+)?
+    ;
+
+// Comment handling
+LINE_COMMENT
+    : '#' ~[\r\n]* -> skip
+    ;
+
+WHITESPACE
+    : [ \t\r\n]+ -> skip
+    ;
