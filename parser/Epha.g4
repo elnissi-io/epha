@@ -3,7 +3,12 @@ grammar Epha;
 program : statement+ ;
 
 statement
-    : resourceDefinition
+    : importStatement
+    | resourceDefinition
+    ;
+
+importStatement
+    : 'import' IDENTIFIER ('as' IDENTIFIER)?
     ;
 
 resourceDefinition
@@ -16,7 +21,7 @@ resourceBody
 
 resourceProperty
     : propertyKey '=' value
-    | propertyKey '[' valueList ']'
+    | propertyKey '=' valueList
     | propertyKey '{' resourcePropertyBody '}'
     ;
 
@@ -34,11 +39,11 @@ value
     ;
 
 valueList
-    : value (',' value)*
+    : '[' value (',' value)* ']'
     ;
 
 IDENTIFIER
-    : [a-zA-Z_] [a-zA-Z_0-9]*
+    : [a-zA-Z_] [a-zA-Z_0-9\-]*
     ;
 
 STRING

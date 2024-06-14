@@ -1,52 +1,48 @@
 package main
 
 import (
-	"epha/pkg/generator"
 	"epha/pkg/listener"
 	"epha/pkg/parser"
+	"epha/pkg/stdlib"
 	"fmt"
 	"io/ioutil"
-	"os"
 
 	"github.com/antlr4-go/antlr/v4"
 	"github.com/spf13/cobra"
-	v1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 )
 
 func renderCmd() *cobra.Command {
-	return &cobra.Command{
+	cmd := &cobra.Command{
 		Use:   "render [file]",
-		Short: "Render the defined objects as YAML",
+		Short: "Render a Kubernetes resource file",
 		Args:  cobra.MinimumNArgs(1),
 		Run: func(cmd *cobra.Command, args []string) {
-			file := args[0]
-			content, err := ioutil.ReadFile(file)
+			filePath := args[0]
+
+			content, err := ioutil.ReadFile(filePath)
 			if err != nil {
-				fmt.Printf("Error reading file: %v\n", err)
-				os.Exit(1)
+				fmt.Println("Error reading file:", err)
+				return
 			}
 
 			input := antlr.NewInputStream(string(content))
 			lexer := parser.NewEphaLexer(input)
-			stream := antlr.NewCommonTokenStream(lexer, antlr.TokenDefaultChannel)
+			stream := antlr.NewCommonTokenStream(lexer, 0)
 			p := parser.NewEphaParser(stream)
 
-			// Pass an empty slice of CustomResourceDefinition for now
-			crds := []*v1.CustomResourceDefinition{}
-			listener := listener.NewEphaListener(crds)
+			crds, err := stdlib.LoadCRDs(".") // Ensure this path is correct
+			if err != nil {
+				fmt.Println("Error loading CRDs:", err)
+				return
+			}
+
+			ctx := stdlib.NewImportContext()
+			listener := listener.NewEphaListener(crds, ctx)
 			antlr.ParseTreeWalkerDefault.Walk(listener, p.Program())
 
 			program := listener.GetProgram()
-
-			gen := generator.NewGenerator(program, crds)
-			yaml, err := gen.Generate()
-			if err != nil {
-				fmt.Printf("Error generating YAML: %v\n", err)
-				os.Exit(1)
-			}
-
-			fmt.Println(yaml)
+			fmt.Println("Parsed program:", program)
 		},
 	}
+	return cmd
 }
-

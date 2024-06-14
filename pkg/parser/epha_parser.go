@@ -32,48 +32,54 @@ var EphaParserStaticData struct {
 func ephaParserInit() {
 	staticData := &EphaParserStaticData
 	staticData.LiteralNames = []string{
-		"", "'{'", "'}'", "'='", "'['", "']'", "'.'", "','",
+		"", "'import'", "'as'", "'{'", "'}'", "'='", "'.'", "'['", "','", "']'",
 	}
 	staticData.SymbolicNames = []string{
-		"", "", "", "", "", "", "", "", "IDENTIFIER", "STRING", "NUMBER", "LINE_COMMENT",
-		"WHITESPACE",
+		"", "", "", "", "", "", "", "", "", "", "IDENTIFIER", "STRING", "NUMBER",
+		"LINE_COMMENT", "WHITESPACE",
 	}
 	staticData.RuleNames = []string{
-		"program", "statement", "resourceDefinition", "resourceBody", "resourceProperty",
-		"resourcePropertyBody", "propertyKey", "value", "valueList",
+		"program", "statement", "importStatement", "resourceDefinition", "resourceBody",
+		"resourceProperty", "resourcePropertyBody", "propertyKey", "value",
+		"valueList",
 	}
 	staticData.PredictionContextCache = antlr.NewPredictionContextCache()
 	staticData.serializedATN = []int32{
-		4, 1, 12, 78, 2, 0, 7, 0, 2, 1, 7, 1, 2, 2, 7, 2, 2, 3, 7, 3, 2, 4, 7,
-		4, 2, 5, 7, 5, 2, 6, 7, 6, 2, 7, 7, 7, 2, 8, 7, 8, 1, 0, 4, 0, 20, 8, 0,
-		11, 0, 12, 0, 21, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 3,
-		5, 3, 33, 8, 3, 10, 3, 12, 3, 36, 9, 3, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1,
-		4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 3, 4, 52, 8, 4, 1, 5,
-		5, 5, 55, 8, 5, 10, 5, 12, 5, 58, 9, 5, 1, 6, 1, 6, 1, 6, 5, 6, 63, 8,
-		6, 10, 6, 12, 6, 66, 9, 6, 1, 7, 1, 7, 1, 8, 1, 8, 1, 8, 5, 8, 73, 8, 8,
-		10, 8, 12, 8, 76, 9, 8, 1, 8, 0, 0, 9, 0, 2, 4, 6, 8, 10, 12, 14, 16, 0,
-		1, 1, 0, 9, 10, 75, 0, 19, 1, 0, 0, 0, 2, 23, 1, 0, 0, 0, 4, 25, 1, 0,
-		0, 0, 6, 34, 1, 0, 0, 0, 8, 51, 1, 0, 0, 0, 10, 56, 1, 0, 0, 0, 12, 59,
-		1, 0, 0, 0, 14, 67, 1, 0, 0, 0, 16, 69, 1, 0, 0, 0, 18, 20, 3, 2, 1, 0,
-		19, 18, 1, 0, 0, 0, 20, 21, 1, 0, 0, 0, 21, 19, 1, 0, 0, 0, 21, 22, 1,
-		0, 0, 0, 22, 1, 1, 0, 0, 0, 23, 24, 3, 4, 2, 0, 24, 3, 1, 0, 0, 0, 25,
-		26, 5, 8, 0, 0, 26, 27, 5, 8, 0, 0, 27, 28, 5, 1, 0, 0, 28, 29, 3, 6, 3,
-		0, 29, 30, 5, 2, 0, 0, 30, 5, 1, 0, 0, 0, 31, 33, 3, 8, 4, 0, 32, 31, 1,
-		0, 0, 0, 33, 36, 1, 0, 0, 0, 34, 32, 1, 0, 0, 0, 34, 35, 1, 0, 0, 0, 35,
-		7, 1, 0, 0, 0, 36, 34, 1, 0, 0, 0, 37, 38, 3, 12, 6, 0, 38, 39, 5, 3, 0,
-		0, 39, 40, 3, 14, 7, 0, 40, 52, 1, 0, 0, 0, 41, 42, 3, 12, 6, 0, 42, 43,
-		5, 4, 0, 0, 43, 44, 3, 16, 8, 0, 44, 45, 5, 5, 0, 0, 45, 52, 1, 0, 0, 0,
-		46, 47, 3, 12, 6, 0, 47, 48, 5, 1, 0, 0, 48, 49, 3, 10, 5, 0, 49, 50, 5,
-		2, 0, 0, 50, 52, 1, 0, 0, 0, 51, 37, 1, 0, 0, 0, 51, 41, 1, 0, 0, 0, 51,
-		46, 1, 0, 0, 0, 52, 9, 1, 0, 0, 0, 53, 55, 3, 8, 4, 0, 54, 53, 1, 0, 0,
-		0, 55, 58, 1, 0, 0, 0, 56, 54, 1, 0, 0, 0, 56, 57, 1, 0, 0, 0, 57, 11,
-		1, 0, 0, 0, 58, 56, 1, 0, 0, 0, 59, 64, 5, 8, 0, 0, 60, 61, 5, 6, 0, 0,
-		61, 63, 5, 8, 0, 0, 62, 60, 1, 0, 0, 0, 63, 66, 1, 0, 0, 0, 64, 62, 1,
-		0, 0, 0, 64, 65, 1, 0, 0, 0, 65, 13, 1, 0, 0, 0, 66, 64, 1, 0, 0, 0, 67,
-		68, 7, 0, 0, 0, 68, 15, 1, 0, 0, 0, 69, 74, 3, 14, 7, 0, 70, 71, 5, 7,
-		0, 0, 71, 73, 3, 14, 7, 0, 72, 70, 1, 0, 0, 0, 73, 76, 1, 0, 0, 0, 74,
-		72, 1, 0, 0, 0, 74, 75, 1, 0, 0, 0, 75, 17, 1, 0, 0, 0, 76, 74, 1, 0, 0,
-		0, 6, 21, 34, 51, 56, 64, 74,
+		4, 1, 14, 90, 2, 0, 7, 0, 2, 1, 7, 1, 2, 2, 7, 2, 2, 3, 7, 3, 2, 4, 7,
+		4, 2, 5, 7, 5, 2, 6, 7, 6, 2, 7, 7, 7, 2, 8, 7, 8, 2, 9, 7, 9, 1, 0, 4,
+		0, 22, 8, 0, 11, 0, 12, 0, 23, 1, 1, 1, 1, 3, 1, 28, 8, 1, 1, 2, 1, 2,
+		1, 2, 1, 2, 3, 2, 34, 8, 2, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 4, 5,
+		4, 43, 8, 4, 10, 4, 12, 4, 46, 9, 4, 1, 5, 1, 5, 1, 5, 1, 5, 1, 5, 1, 5,
+		1, 5, 1, 5, 1, 5, 1, 5, 1, 5, 1, 5, 1, 5, 3, 5, 61, 8, 5, 1, 6, 5, 6, 64,
+		8, 6, 10, 6, 12, 6, 67, 9, 6, 1, 7, 1, 7, 1, 7, 5, 7, 72, 8, 7, 10, 7,
+		12, 7, 75, 9, 7, 1, 8, 1, 8, 1, 9, 1, 9, 1, 9, 1, 9, 5, 9, 83, 8, 9, 10,
+		9, 12, 9, 86, 9, 9, 1, 9, 1, 9, 1, 9, 0, 0, 10, 0, 2, 4, 6, 8, 10, 12,
+		14, 16, 18, 0, 1, 1, 0, 11, 12, 88, 0, 21, 1, 0, 0, 0, 2, 27, 1, 0, 0,
+		0, 4, 29, 1, 0, 0, 0, 6, 35, 1, 0, 0, 0, 8, 44, 1, 0, 0, 0, 10, 60, 1,
+		0, 0, 0, 12, 65, 1, 0, 0, 0, 14, 68, 1, 0, 0, 0, 16, 76, 1, 0, 0, 0, 18,
+		78, 1, 0, 0, 0, 20, 22, 3, 2, 1, 0, 21, 20, 1, 0, 0, 0, 22, 23, 1, 0, 0,
+		0, 23, 21, 1, 0, 0, 0, 23, 24, 1, 0, 0, 0, 24, 1, 1, 0, 0, 0, 25, 28, 3,
+		4, 2, 0, 26, 28, 3, 6, 3, 0, 27, 25, 1, 0, 0, 0, 27, 26, 1, 0, 0, 0, 28,
+		3, 1, 0, 0, 0, 29, 30, 5, 1, 0, 0, 30, 33, 5, 10, 0, 0, 31, 32, 5, 2, 0,
+		0, 32, 34, 5, 10, 0, 0, 33, 31, 1, 0, 0, 0, 33, 34, 1, 0, 0, 0, 34, 5,
+		1, 0, 0, 0, 35, 36, 5, 10, 0, 0, 36, 37, 5, 10, 0, 0, 37, 38, 5, 3, 0,
+		0, 38, 39, 3, 8, 4, 0, 39, 40, 5, 4, 0, 0, 40, 7, 1, 0, 0, 0, 41, 43, 3,
+		10, 5, 0, 42, 41, 1, 0, 0, 0, 43, 46, 1, 0, 0, 0, 44, 42, 1, 0, 0, 0, 44,
+		45, 1, 0, 0, 0, 45, 9, 1, 0, 0, 0, 46, 44, 1, 0, 0, 0, 47, 48, 3, 14, 7,
+		0, 48, 49, 5, 5, 0, 0, 49, 50, 3, 16, 8, 0, 50, 61, 1, 0, 0, 0, 51, 52,
+		3, 14, 7, 0, 52, 53, 5, 5, 0, 0, 53, 54, 3, 18, 9, 0, 54, 61, 1, 0, 0,
+		0, 55, 56, 3, 14, 7, 0, 56, 57, 5, 3, 0, 0, 57, 58, 3, 12, 6, 0, 58, 59,
+		5, 4, 0, 0, 59, 61, 1, 0, 0, 0, 60, 47, 1, 0, 0, 0, 60, 51, 1, 0, 0, 0,
+		60, 55, 1, 0, 0, 0, 61, 11, 1, 0, 0, 0, 62, 64, 3, 10, 5, 0, 63, 62, 1,
+		0, 0, 0, 64, 67, 1, 0, 0, 0, 65, 63, 1, 0, 0, 0, 65, 66, 1, 0, 0, 0, 66,
+		13, 1, 0, 0, 0, 67, 65, 1, 0, 0, 0, 68, 73, 5, 10, 0, 0, 69, 70, 5, 6,
+		0, 0, 70, 72, 5, 10, 0, 0, 71, 69, 1, 0, 0, 0, 72, 75, 1, 0, 0, 0, 73,
+		71, 1, 0, 0, 0, 73, 74, 1, 0, 0, 0, 74, 15, 1, 0, 0, 0, 75, 73, 1, 0, 0,
+		0, 76, 77, 7, 0, 0, 0, 77, 17, 1, 0, 0, 0, 78, 79, 5, 7, 0, 0, 79, 84,
+		3, 16, 8, 0, 80, 81, 5, 8, 0, 0, 81, 83, 3, 16, 8, 0, 82, 80, 1, 0, 0,
+		0, 83, 86, 1, 0, 0, 0, 84, 82, 1, 0, 0, 0, 84, 85, 1, 0, 0, 0, 85, 87,
+		1, 0, 0, 0, 86, 84, 1, 0, 0, 0, 87, 88, 5, 9, 0, 0, 88, 19, 1, 0, 0, 0,
+		8, 23, 27, 33, 44, 60, 65, 73, 84,
 	}
 	deserializer := antlr.NewATNDeserializer(nil)
 	staticData.atn = deserializer.Deserialize(staticData.serializedATN)
@@ -119,24 +125,27 @@ const (
 	EphaParserT__4         = 5
 	EphaParserT__5         = 6
 	EphaParserT__6         = 7
-	EphaParserIDENTIFIER   = 8
-	EphaParserSTRING       = 9
-	EphaParserNUMBER       = 10
-	EphaParserLINE_COMMENT = 11
-	EphaParserWHITESPACE   = 12
+	EphaParserT__7         = 8
+	EphaParserT__8         = 9
+	EphaParserIDENTIFIER   = 10
+	EphaParserSTRING       = 11
+	EphaParserNUMBER       = 12
+	EphaParserLINE_COMMENT = 13
+	EphaParserWHITESPACE   = 14
 )
 
 // EphaParser rules.
 const (
 	EphaParserRULE_program              = 0
 	EphaParserRULE_statement            = 1
-	EphaParserRULE_resourceDefinition   = 2
-	EphaParserRULE_resourceBody         = 3
-	EphaParserRULE_resourceProperty     = 4
-	EphaParserRULE_resourcePropertyBody = 5
-	EphaParserRULE_propertyKey          = 6
-	EphaParserRULE_value                = 7
-	EphaParserRULE_valueList            = 8
+	EphaParserRULE_importStatement      = 2
+	EphaParserRULE_resourceDefinition   = 3
+	EphaParserRULE_resourceBody         = 4
+	EphaParserRULE_resourceProperty     = 5
+	EphaParserRULE_resourcePropertyBody = 6
+	EphaParserRULE_propertyKey          = 7
+	EphaParserRULE_value                = 8
+	EphaParserRULE_valueList            = 9
 )
 
 // IProgramContext is an interface to support dynamic dispatch.
@@ -253,20 +262,20 @@ func (p *EphaParser) Program() (localctx IProgramContext) {
 	var _la int
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(19)
+	p.SetState(21)
 	p.GetErrorHandler().Sync(p)
 	if p.HasError() {
 		goto errorExit
 	}
 	_la = p.GetTokenStream().LA(1)
 
-	for ok := true; ok; ok = _la == EphaParserIDENTIFIER {
+	for ok := true; ok; ok = _la == EphaParserT__0 || _la == EphaParserIDENTIFIER {
 		{
-			p.SetState(18)
+			p.SetState(20)
 			p.Statement()
 		}
 
-		p.SetState(21)
+		p.SetState(23)
 		p.GetErrorHandler().Sync(p)
 		if p.HasError() {
 			goto errorExit
@@ -295,6 +304,7 @@ type IStatementContext interface {
 	GetParser() antlr.Parser
 
 	// Getter signatures
+	ImportStatement() IImportStatementContext
 	ResourceDefinition() IResourceDefinitionContext
 
 	// IsStatementContext differentiates from other interfaces.
@@ -332,6 +342,22 @@ func NewStatementContext(parser antlr.Parser, parent antlr.ParserRuleContext, in
 }
 
 func (s *StatementContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *StatementContext) ImportStatement() IImportStatementContext {
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(IImportStatementContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IImportStatementContext)
+}
 
 func (s *StatementContext) ResourceDefinition() IResourceDefinitionContext {
 	var t antlr.RuleContext
@@ -372,10 +398,167 @@ func (s *StatementContext) ExitRule(listener antlr.ParseTreeListener) {
 func (p *EphaParser) Statement() (localctx IStatementContext) {
 	localctx = NewStatementContext(p, p.GetParserRuleContext(), p.GetState())
 	p.EnterRule(localctx, 2, EphaParserRULE_statement)
+	p.SetState(27)
+	p.GetErrorHandler().Sync(p)
+	if p.HasError() {
+		goto errorExit
+	}
+
+	switch p.GetTokenStream().LA(1) {
+	case EphaParserT__0:
+		p.EnterOuterAlt(localctx, 1)
+		{
+			p.SetState(25)
+			p.ImportStatement()
+		}
+
+	case EphaParserIDENTIFIER:
+		p.EnterOuterAlt(localctx, 2)
+		{
+			p.SetState(26)
+			p.ResourceDefinition()
+		}
+
+	default:
+		p.SetError(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
+		goto errorExit
+	}
+
+errorExit:
+	if p.HasError() {
+		v := p.GetError()
+		localctx.SetException(v)
+		p.GetErrorHandler().ReportError(p, v)
+		p.GetErrorHandler().Recover(p, v)
+		p.SetError(nil)
+	}
+	p.ExitRule()
+	return localctx
+	goto errorExit // Trick to prevent compiler error if the label is not used
+}
+
+// IImportStatementContext is an interface to support dynamic dispatch.
+type IImportStatementContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// Getter signatures
+	AllIDENTIFIER() []antlr.TerminalNode
+	IDENTIFIER(i int) antlr.TerminalNode
+
+	// IsImportStatementContext differentiates from other interfaces.
+	IsImportStatementContext()
+}
+
+type ImportStatementContext struct {
+	antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptyImportStatementContext() *ImportStatementContext {
+	var p = new(ImportStatementContext)
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
+	p.RuleIndex = EphaParserRULE_importStatement
+	return p
+}
+
+func InitEmptyImportStatementContext(p *ImportStatementContext) {
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
+	p.RuleIndex = EphaParserRULE_importStatement
+}
+
+func (*ImportStatementContext) IsImportStatementContext() {}
+
+func NewImportStatementContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *ImportStatementContext {
+	var p = new(ImportStatementContext)
+
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = EphaParserRULE_importStatement
+
+	return p
+}
+
+func (s *ImportStatementContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *ImportStatementContext) AllIDENTIFIER() []antlr.TerminalNode {
+	return s.GetTokens(EphaParserIDENTIFIER)
+}
+
+func (s *ImportStatementContext) IDENTIFIER(i int) antlr.TerminalNode {
+	return s.GetToken(EphaParserIDENTIFIER, i)
+}
+
+func (s *ImportStatementContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *ImportStatementContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *ImportStatementContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(EphaListener); ok {
+		listenerT.EnterImportStatement(s)
+	}
+}
+
+func (s *ImportStatementContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(EphaListener); ok {
+		listenerT.ExitImportStatement(s)
+	}
+}
+
+func (p *EphaParser) ImportStatement() (localctx IImportStatementContext) {
+	localctx = NewImportStatementContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 4, EphaParserRULE_importStatement)
+	var _la int
+
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(23)
-		p.ResourceDefinition()
+		p.SetState(29)
+		p.Match(EphaParserT__0)
+		if p.HasError() {
+			// Recognition error - abort rule
+			goto errorExit
+		}
+	}
+	{
+		p.SetState(30)
+		p.Match(EphaParserIDENTIFIER)
+		if p.HasError() {
+			// Recognition error - abort rule
+			goto errorExit
+		}
+	}
+	p.SetState(33)
+	p.GetErrorHandler().Sync(p)
+	if p.HasError() {
+		goto errorExit
+	}
+	_la = p.GetTokenStream().LA(1)
+
+	if _la == EphaParserT__1 {
+		{
+			p.SetState(31)
+			p.Match(EphaParserT__1)
+			if p.HasError() {
+				// Recognition error - abort rule
+				goto errorExit
+			}
+		}
+		{
+			p.SetState(32)
+			p.Match(EphaParserIDENTIFIER)
+			if p.HasError() {
+				// Recognition error - abort rule
+				goto errorExit
+			}
+		}
+
 	}
 
 errorExit:
@@ -485,10 +668,10 @@ func (s *ResourceDefinitionContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *EphaParser) ResourceDefinition() (localctx IResourceDefinitionContext) {
 	localctx = NewResourceDefinitionContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 4, EphaParserRULE_resourceDefinition)
+	p.EnterRule(localctx, 6, EphaParserRULE_resourceDefinition)
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(25)
+		p.SetState(35)
 		p.Match(EphaParserIDENTIFIER)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -496,7 +679,7 @@ func (p *EphaParser) ResourceDefinition() (localctx IResourceDefinitionContext) 
 		}
 	}
 	{
-		p.SetState(26)
+		p.SetState(36)
 		p.Match(EphaParserIDENTIFIER)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -504,20 +687,20 @@ func (p *EphaParser) ResourceDefinition() (localctx IResourceDefinitionContext) 
 		}
 	}
 	{
-		p.SetState(27)
-		p.Match(EphaParserT__0)
+		p.SetState(37)
+		p.Match(EphaParserT__2)
 		if p.HasError() {
 			// Recognition error - abort rule
 			goto errorExit
 		}
 	}
 	{
-		p.SetState(28)
+		p.SetState(38)
 		p.ResourceBody()
 	}
 	{
-		p.SetState(29)
-		p.Match(EphaParserT__1)
+		p.SetState(39)
+		p.Match(EphaParserT__3)
 		if p.HasError() {
 			// Recognition error - abort rule
 			goto errorExit
@@ -647,11 +830,11 @@ func (s *ResourceBodyContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *EphaParser) ResourceBody() (localctx IResourceBodyContext) {
 	localctx = NewResourceBodyContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 6, EphaParserRULE_resourceBody)
+	p.EnterRule(localctx, 8, EphaParserRULE_resourceBody)
 	var _la int
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(34)
+	p.SetState(44)
 	p.GetErrorHandler().Sync(p)
 	if p.HasError() {
 		goto errorExit
@@ -660,11 +843,11 @@ func (p *EphaParser) ResourceBody() (localctx IResourceBodyContext) {
 
 	for _la == EphaParserIDENTIFIER {
 		{
-			p.SetState(31)
+			p.SetState(41)
 			p.ResourceProperty()
 		}
 
-		p.SetState(36)
+		p.SetState(46)
 		p.GetErrorHandler().Sync(p)
 		if p.HasError() {
 			goto errorExit
@@ -820,22 +1003,60 @@ func (s *ResourcePropertyContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *EphaParser) ResourceProperty() (localctx IResourcePropertyContext) {
 	localctx = NewResourcePropertyContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 8, EphaParserRULE_resourceProperty)
-	p.SetState(51)
+	p.EnterRule(localctx, 10, EphaParserRULE_resourceProperty)
+	p.SetState(60)
 	p.GetErrorHandler().Sync(p)
 	if p.HasError() {
 		goto errorExit
 	}
 
-	switch p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 2, p.GetParserRuleContext()) {
+	switch p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 4, p.GetParserRuleContext()) {
 	case 1:
 		p.EnterOuterAlt(localctx, 1)
 		{
-			p.SetState(37)
+			p.SetState(47)
 			p.PropertyKey()
 		}
 		{
-			p.SetState(38)
+			p.SetState(48)
+			p.Match(EphaParserT__4)
+			if p.HasError() {
+				// Recognition error - abort rule
+				goto errorExit
+			}
+		}
+		{
+			p.SetState(49)
+			p.Value()
+		}
+
+	case 2:
+		p.EnterOuterAlt(localctx, 2)
+		{
+			p.SetState(51)
+			p.PropertyKey()
+		}
+		{
+			p.SetState(52)
+			p.Match(EphaParserT__4)
+			if p.HasError() {
+				// Recognition error - abort rule
+				goto errorExit
+			}
+		}
+		{
+			p.SetState(53)
+			p.ValueList()
+		}
+
+	case 3:
+		p.EnterOuterAlt(localctx, 3)
+		{
+			p.SetState(55)
+			p.PropertyKey()
+		}
+		{
+			p.SetState(56)
 			p.Match(EphaParserT__2)
 			if p.HasError() {
 				// Recognition error - abort rule
@@ -843,58 +1064,12 @@ func (p *EphaParser) ResourceProperty() (localctx IResourcePropertyContext) {
 			}
 		}
 		{
-			p.SetState(39)
-			p.Value()
-		}
-
-	case 2:
-		p.EnterOuterAlt(localctx, 2)
-		{
-			p.SetState(41)
-			p.PropertyKey()
-		}
-		{
-			p.SetState(42)
-			p.Match(EphaParserT__3)
-			if p.HasError() {
-				// Recognition error - abort rule
-				goto errorExit
-			}
-		}
-		{
-			p.SetState(43)
-			p.ValueList()
-		}
-		{
-			p.SetState(44)
-			p.Match(EphaParserT__4)
-			if p.HasError() {
-				// Recognition error - abort rule
-				goto errorExit
-			}
-		}
-
-	case 3:
-		p.EnterOuterAlt(localctx, 3)
-		{
-			p.SetState(46)
-			p.PropertyKey()
-		}
-		{
-			p.SetState(47)
-			p.Match(EphaParserT__0)
-			if p.HasError() {
-				// Recognition error - abort rule
-				goto errorExit
-			}
-		}
-		{
-			p.SetState(48)
+			p.SetState(57)
 			p.ResourcePropertyBody()
 		}
 		{
-			p.SetState(49)
-			p.Match(EphaParserT__1)
+			p.SetState(58)
+			p.Match(EphaParserT__3)
 			if p.HasError() {
 				// Recognition error - abort rule
 				goto errorExit
@@ -1028,11 +1203,11 @@ func (s *ResourcePropertyBodyContext) ExitRule(listener antlr.ParseTreeListener)
 
 func (p *EphaParser) ResourcePropertyBody() (localctx IResourcePropertyBodyContext) {
 	localctx = NewResourcePropertyBodyContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 10, EphaParserRULE_resourcePropertyBody)
+	p.EnterRule(localctx, 12, EphaParserRULE_resourcePropertyBody)
 	var _la int
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(56)
+	p.SetState(65)
 	p.GetErrorHandler().Sync(p)
 	if p.HasError() {
 		goto errorExit
@@ -1041,11 +1216,11 @@ func (p *EphaParser) ResourcePropertyBody() (localctx IResourcePropertyBodyConte
 
 	for _la == EphaParserIDENTIFIER {
 		{
-			p.SetState(53)
+			p.SetState(62)
 			p.ResourceProperty()
 		}
 
-		p.SetState(58)
+		p.SetState(67)
 		p.GetErrorHandler().Sync(p)
 		if p.HasError() {
 			goto errorExit
@@ -1143,19 +1318,19 @@ func (s *PropertyKeyContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *EphaParser) PropertyKey() (localctx IPropertyKeyContext) {
 	localctx = NewPropertyKeyContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 12, EphaParserRULE_propertyKey)
+	p.EnterRule(localctx, 14, EphaParserRULE_propertyKey)
 	var _la int
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(59)
+		p.SetState(68)
 		p.Match(EphaParserIDENTIFIER)
 		if p.HasError() {
 			// Recognition error - abort rule
 			goto errorExit
 		}
 	}
-	p.SetState(64)
+	p.SetState(73)
 	p.GetErrorHandler().Sync(p)
 	if p.HasError() {
 		goto errorExit
@@ -1164,7 +1339,7 @@ func (p *EphaParser) PropertyKey() (localctx IPropertyKeyContext) {
 
 	for _la == EphaParserT__5 {
 		{
-			p.SetState(60)
+			p.SetState(69)
 			p.Match(EphaParserT__5)
 			if p.HasError() {
 				// Recognition error - abort rule
@@ -1172,7 +1347,7 @@ func (p *EphaParser) PropertyKey() (localctx IPropertyKeyContext) {
 			}
 		}
 		{
-			p.SetState(61)
+			p.SetState(70)
 			p.Match(EphaParserIDENTIFIER)
 			if p.HasError() {
 				// Recognition error - abort rule
@@ -1180,7 +1355,7 @@ func (p *EphaParser) PropertyKey() (localctx IPropertyKeyContext) {
 			}
 		}
 
-		p.SetState(66)
+		p.SetState(75)
 		p.GetErrorHandler().Sync(p)
 		if p.HasError() {
 			goto errorExit
@@ -1278,12 +1453,12 @@ func (s *ValueContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *EphaParser) Value() (localctx IValueContext) {
 	localctx = NewValueContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 14, EphaParserRULE_value)
+	p.EnterRule(localctx, 16, EphaParserRULE_value)
 	var _la int
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(67)
+		p.SetState(76)
 		_la = p.GetTokenStream().LA(1)
 
 		if !(_la == EphaParserSTRING || _la == EphaParserNUMBER) {
@@ -1417,41 +1592,57 @@ func (s *ValueListContext) ExitRule(listener antlr.ParseTreeListener) {
 
 func (p *EphaParser) ValueList() (localctx IValueListContext) {
 	localctx = NewValueListContext(p, p.GetParserRuleContext(), p.GetState())
-	p.EnterRule(localctx, 16, EphaParserRULE_valueList)
+	p.EnterRule(localctx, 18, EphaParserRULE_valueList)
 	var _la int
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(69)
+		p.SetState(78)
+		p.Match(EphaParserT__6)
+		if p.HasError() {
+			// Recognition error - abort rule
+			goto errorExit
+		}
+	}
+	{
+		p.SetState(79)
 		p.Value()
 	}
-	p.SetState(74)
+	p.SetState(84)
 	p.GetErrorHandler().Sync(p)
 	if p.HasError() {
 		goto errorExit
 	}
 	_la = p.GetTokenStream().LA(1)
 
-	for _la == EphaParserT__6 {
+	for _la == EphaParserT__7 {
 		{
-			p.SetState(70)
-			p.Match(EphaParserT__6)
+			p.SetState(80)
+			p.Match(EphaParserT__7)
 			if p.HasError() {
 				// Recognition error - abort rule
 				goto errorExit
 			}
 		}
 		{
-			p.SetState(71)
+			p.SetState(81)
 			p.Value()
 		}
 
-		p.SetState(76)
+		p.SetState(86)
 		p.GetErrorHandler().Sync(p)
 		if p.HasError() {
 			goto errorExit
 		}
 		_la = p.GetTokenStream().LA(1)
+	}
+	{
+		p.SetState(87)
+		p.Match(EphaParserT__8)
+		if p.HasError() {
+			// Recognition error - abort rule
+			goto errorExit
+		}
 	}
 
 errorExit:

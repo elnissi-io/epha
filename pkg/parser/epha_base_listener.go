@@ -32,6 +32,12 @@ func (s *BaseEphaListener) EnterStatement(ctx *StatementContext) {}
 // ExitStatement is called when production statement is exited.
 func (s *BaseEphaListener) ExitStatement(ctx *StatementContext) {}
 
+// EnterImportStatement is called when production importStatement is entered.
+func (s *BaseEphaListener) EnterImportStatement(ctx *ImportStatementContext) {}
+
+// ExitImportStatement is called when production importStatement is exited.
+func (s *BaseEphaListener) ExitImportStatement(ctx *ImportStatementContext) {}
+
 // EnterResourceDefinition is called when production resourceDefinition is entered.
 func (s *BaseEphaListener) EnterResourceDefinition(ctx *ResourceDefinitionContext) {}
 

@@ -13,6 +13,9 @@ type EphaListener interface {
 	// EnterStatement is called when entering the statement production.
 	EnterStatement(c *StatementContext)
 
+	// EnterImportStatement is called when entering the importStatement production.
+	EnterImportStatement(c *ImportStatementContext)
+
 	// EnterResourceDefinition is called when entering the resourceDefinition production.
 	EnterResourceDefinition(c *ResourceDefinitionContext)
 
@@ -39,6 +42,9 @@ type EphaListener interface {
 
 	// ExitStatement is called when exiting the statement production.
 	ExitStatement(c *StatementContext)
+
+	// ExitImportStatement is called when exiting the importStatement production.
+	ExitImportStatement(c *ImportStatementContext)
 
 	// ExitResourceDefinition is called when exiting the resourceDefinition production.
 	ExitResourceDefinition(c *ResourceDefinitionContext)

@@ -2,23 +2,24 @@ package stdlib
 
 import (
 	"fmt"
+	"reflect"
 	"sync"
 )
 
 var (
 	moduleRegistry = make(map[string]func() Module)
+	resourceRegistry = make(map[string]reflect.Type)
 	regLock        sync.Mutex
 )
 
 // RegisterModule registers a module by its name and a constructor function.
 func RegisterModule(name string, constructor func() Module) {
-    regLock.Lock()
-    defer regLock.Unlock()
-    if _, exists := moduleRegistry[name]; exists {
-        panic(fmt.Sprintf("module already registered: %s", name))
-    }
-    fmt.Println("Registering module:", name) // Debugging line
-    moduleRegistry[name] = constructor
+	regLock.Lock()
+	defer regLock.Unlock()
+	if _, exists := moduleRegistry[name]; exists {
+		panic(fmt.Sprintf("module already registered: %s", name))
+	}
+	moduleRegistry[name] = constructor
 }
 
 type ImportContext struct {
@@ -42,4 +43,20 @@ func (ctx *ImportContext) ImportModule(name, alias string) error {
 	}
 	ctx.imports[alias] = module
 	return nil
+}
+
+func (ctx *ImportContext) ImportResourceType(name string, objType reflect.Type) {
+	regLock.Lock()
+	defer regLock.Unlock()
+	resourceRegistry[name] = objType
+}
+
+func GetResourceType(name string) (reflect.Type, error) {
+	regLock.Lock()
+	defer regLock.Unlock()
+	objType, exists := resourceRegistry[name]
+	if !exists {
+		return nil, fmt.Errorf("resource not found: %s", name)
+	}
+	return objType, nil
 }
