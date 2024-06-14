@@ -5,7 +5,8 @@ import (
 	"epha/pkg/listener"
 	"epha/pkg/parser"
 	"fmt"
-	"github.com/antlr/antlr4/runtime/Go/antlr"
+
+	"github.com/antlr4-go/antlr/v4"
 )
 
 func main() {

@@ -1,94 +1,18 @@
-// Code generated from antlr/Epha.g4 by ANTLR 4.7.2. DO NOT EDIT.
+// Code generated from parser/Epha.g4 by ANTLR 4.13.1. DO NOT EDIT.
 
 package parser
 
 import (
 	"fmt"
+	"github.com/antlr4-go/antlr/v4"
+	"sync"
 	"unicode"
-
-	"github.com/antlr/antlr4/runtime/Go/antlr"
 )
 
 // Suppress unused import error
 var _ = fmt.Printf
+var _ = sync.Once{}
 var _ = unicode.IsLetter
-
-var serializedLexerAtn = []uint16{
-	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 2, 18, 109,
-	8, 1, 4, 2, 9, 2, 4, 3, 9, 3, 4, 4, 9, 4, 4, 5, 9, 5, 4, 6, 9, 6, 4, 7,
-	9, 7, 4, 8, 9, 8, 4, 9, 9, 9, 4, 10, 9, 10, 4, 11, 9, 11, 4, 12, 9, 12,
-	4, 13, 9, 13, 4, 14, 9, 14, 4, 15, 9, 15, 4, 16, 9, 16, 4, 17, 9, 17, 3,
-	2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-	4, 3, 4, 3, 5, 3, 5, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 7, 3, 7, 3, 8, 3,
-	8, 3, 9, 3, 9, 3, 9, 3, 9, 3, 10, 3, 10, 3, 11, 3, 11, 3, 12, 3, 12, 3,
-	13, 3, 13, 7, 13, 73, 10, 13, 12, 13, 14, 13, 76, 11, 13, 3, 14, 3, 14,
-	7, 14, 80, 10, 14, 12, 14, 14, 14, 83, 11, 14, 3, 14, 3, 14, 3, 15, 6,
-	15, 88, 10, 15, 13, 15, 14, 15, 89, 3, 16, 3, 16, 3, 16, 3, 16, 3, 16,
-	3, 16, 3, 16, 3, 16, 3, 16, 5, 16, 101, 10, 16, 3, 17, 6, 17, 104, 10,
-	17, 13, 17, 14, 17, 105, 3, 17, 3, 17, 3, 81, 2, 18, 3, 3, 5, 4, 7, 5,
-	9, 6, 11, 7, 13, 8, 15, 9, 17, 10, 19, 11, 21, 12, 23, 13, 25, 14, 27,
-	15, 29, 16, 31, 17, 33, 18, 3, 2, 6, 5, 2, 67, 92, 97, 97, 99, 124, 6,
-	2, 50, 59, 67, 92, 97, 97, 99, 124, 3, 2, 50, 59, 5, 2, 11, 12, 15, 15,
-	34, 34, 2, 113, 2, 3, 3, 2, 2, 2, 2, 5, 3, 2, 2, 2, 2, 7, 3, 2, 2, 2, 2,
-	9, 3, 2, 2, 2, 2, 11, 3, 2, 2, 2, 2, 13, 3, 2, 2, 2, 2, 15, 3, 2, 2, 2,
-	2, 17, 3, 2, 2, 2, 2, 19, 3, 2, 2, 2, 2, 21, 3, 2, 2, 2, 2, 23, 3, 2, 2,
-	2, 2, 25, 3, 2, 2, 2, 2, 27, 3, 2, 2, 2, 2, 29, 3, 2, 2, 2, 2, 31, 3, 2,
-	2, 2, 2, 33, 3, 2, 2, 2, 3, 35, 3, 2, 2, 2, 5, 42, 3, 2, 2, 2, 7, 47, 3,
-	2, 2, 2, 9, 49, 3, 2, 2, 2, 11, 51, 3, 2, 2, 2, 13, 56, 3, 2, 2, 2, 15,
-	58, 3, 2, 2, 2, 17, 60, 3, 2, 2, 2, 19, 64, 3, 2, 2, 2, 21, 66, 3, 2, 2,
-	2, 23, 68, 3, 2, 2, 2, 25, 70, 3, 2, 2, 2, 27, 77, 3, 2, 2, 2, 29, 87,
-	3, 2, 2, 2, 31, 100, 3, 2, 2, 2, 33, 103, 3, 2, 2, 2, 35, 36, 7, 107, 2,
-	2, 36, 37, 7, 111, 2, 2, 37, 38, 7, 114, 2, 2, 38, 39, 7, 113, 2, 2, 39,
-	40, 7, 116, 2, 2, 40, 41, 7, 118, 2, 2, 41, 4, 3, 2, 2, 2, 42, 43, 7, 104,
-	2, 2, 43, 44, 7, 116, 2, 2, 44, 45, 7, 113, 2, 2, 45, 46, 7, 111, 2, 2,
-	46, 6, 3, 2, 2, 2, 47, 48, 7, 46, 2, 2, 48, 8, 3, 2, 2, 2, 49, 50, 7, 63,
-	2, 2, 50, 10, 3, 2, 2, 2, 51, 52, 7, 106, 2, 2, 52, 53, 7, 103, 2, 2, 53,
-	54, 7, 110, 2, 2, 54, 55, 7, 111, 2, 2, 55, 12, 3, 2, 2, 2, 56, 57, 7,
-	125, 2, 2, 57, 14, 3, 2, 2, 2, 58, 59, 7, 127, 2, 2, 59, 16, 3, 2, 2, 2,
-	60, 61, 7, 109, 2, 2, 61, 62, 7, 58, 2, 2, 62, 63, 7, 117, 2, 2, 63, 18,
-	3, 2, 2, 2, 64, 65, 7, 60, 2, 2, 65, 20, 3, 2, 2, 2, 66, 67, 7, 93, 2,
-	2, 67, 22, 3, 2, 2, 2, 68, 69, 7, 95, 2, 2, 69, 24, 3, 2, 2, 2, 70, 74,
-	9, 2, 2, 2, 71, 73, 9, 3, 2, 2, 72, 71, 3, 2, 2, 2, 73, 76, 3, 2, 2, 2,
-	74, 72, 3, 2, 2, 2, 74, 75, 3, 2, 2, 2, 75, 26, 3, 2, 2, 2, 76, 74, 3,
-	2, 2, 2, 77, 81, 7, 36, 2, 2, 78, 80, 11, 2, 2, 2, 79, 78, 3, 2, 2, 2,
-	80, 83, 3, 2, 2, 2, 81, 82, 3, 2, 2, 2, 81, 79, 3, 2, 2, 2, 82, 84, 3,
-	2, 2, 2, 83, 81, 3, 2, 2, 2, 84, 85, 7, 36, 2, 2, 85, 28, 3, 2, 2, 2, 86,
-	88, 9, 4, 2, 2, 87, 86, 3, 2, 2, 2, 88, 89, 3, 2, 2, 2, 89, 87, 3, 2, 2,
-	2, 89, 90, 3, 2, 2, 2, 90, 30, 3, 2, 2, 2, 91, 92, 7, 118, 2, 2, 92, 93,
-	7, 116, 2, 2, 93, 94, 7, 119, 2, 2, 94, 101, 7, 103, 2, 2, 95, 96, 7, 104,
-	2, 2, 96, 97, 7, 99, 2, 2, 97, 98, 7, 110, 2, 2, 98, 99, 7, 117, 2, 2,
-	99, 101, 7, 103, 2, 2, 100, 91, 3, 2, 2, 2, 100, 95, 3, 2, 2, 2, 101, 32,
-	3, 2, 2, 2, 102, 104, 9, 5, 2, 2, 103, 102, 3, 2, 2, 2, 104, 105, 3, 2,
-	2, 2, 105, 103, 3, 2, 2, 2, 105, 106, 3, 2, 2, 2, 106, 107, 3, 2, 2, 2,
-	107, 108, 8, 17, 2, 2, 108, 34, 3, 2, 2, 2, 8, 2, 74, 81, 89, 100, 105,
-	3, 8, 2, 2,
-}
-
-var lexerDeserializer = antlr.NewATNDeserializer(nil)
-var lexerAtn = lexerDeserializer.DeserializeFromUInt16(serializedLexerAtn)
-
-var lexerChannelNames = []string{
-	"DEFAULT_TOKEN_CHANNEL", "HIDDEN",
-}
-
-var lexerModeNames = []string{
-	"DEFAULT_MODE",
-}
-
-var lexerLiteralNames = []string{
-	"", "'import'", "'from'", "','", "'='", "'helm'", "'{'", "'}'", "'k8s'",
-	"':'", "'['", "']'",
-}
-
-var lexerSymbolicNames = []string{
-	"", "", "", "", "", "", "", "", "", "", "", "", "IDENTIFIER", "STRING",
-	"NUMBER", "BOOLEAN", "WS",
-}
-
-var lexerRuleNames = []string{
-	"T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", "T__7", "T__8",
-	"T__9", "T__10", "IDENTIFIER", "STRING", "NUMBER", "BOOLEAN", "WS",
-}
 
 type EphaLexer struct {
 	*antlr.BaseLexer
@@ -97,26 +21,119 @@ type EphaLexer struct {
 	// TODO: EOF string
 }
 
-var lexerDecisionToDFA = make([]*antlr.DFA, len(lexerAtn.DecisionToState))
+var EphaLexerLexerStaticData struct {
+	once                   sync.Once
+	serializedATN          []int32
+	ChannelNames           []string
+	ModeNames              []string
+	LiteralNames           []string
+	SymbolicNames          []string
+	RuleNames              []string
+	PredictionContextCache *antlr.PredictionContextCache
+	atn                    *antlr.ATN
+	decisionToDFA          []*antlr.DFA
+}
 
-func init() {
-	for index, ds := range lexerAtn.DecisionToState {
-		lexerDecisionToDFA[index] = antlr.NewDFA(ds, index)
+func ephalexerLexerInit() {
+	staticData := &EphaLexerLexerStaticData
+	staticData.ChannelNames = []string{
+		"DEFAULT_TOKEN_CHANNEL", "HIDDEN",
+	}
+	staticData.ModeNames = []string{
+		"DEFAULT_MODE",
+	}
+	staticData.LiteralNames = []string{
+		"", "'import'", "'from'", "','", "'='", "'helm'", "'{'", "'}'", "'k8s'",
+		"':'", "'['", "']'",
+	}
+	staticData.SymbolicNames = []string{
+		"", "", "", "", "", "", "", "", "", "", "", "", "IDENTIFIER", "STRING",
+		"NUMBER", "BOOLEAN", "WS",
+	}
+	staticData.RuleNames = []string{
+		"T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", "T__7", "T__8",
+		"T__9", "T__10", "IDENTIFIER", "STRING", "NUMBER", "BOOLEAN", "WS",
+	}
+	staticData.PredictionContextCache = antlr.NewPredictionContextCache()
+	staticData.serializedATN = []int32{
+		4, 0, 16, 107, 6, -1, 2, 0, 7, 0, 2, 1, 7, 1, 2, 2, 7, 2, 2, 3, 7, 3, 2,
+		4, 7, 4, 2, 5, 7, 5, 2, 6, 7, 6, 2, 7, 7, 7, 2, 8, 7, 8, 2, 9, 7, 9, 2,
+		10, 7, 10, 2, 11, 7, 11, 2, 12, 7, 12, 2, 13, 7, 13, 2, 14, 7, 14, 2, 15,
+		7, 15, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1,
+		1, 1, 1, 2, 1, 2, 1, 3, 1, 3, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 5, 1, 5,
+		1, 6, 1, 6, 1, 7, 1, 7, 1, 7, 1, 7, 1, 8, 1, 8, 1, 9, 1, 9, 1, 10, 1, 10,
+		1, 11, 1, 11, 5, 11, 71, 8, 11, 10, 11, 12, 11, 74, 9, 11, 1, 12, 1, 12,
+		5, 12, 78, 8, 12, 10, 12, 12, 12, 81, 9, 12, 1, 12, 1, 12, 1, 13, 4, 13,
+		86, 8, 13, 11, 13, 12, 13, 87, 1, 14, 1, 14, 1, 14, 1, 14, 1, 14, 1, 14,
+		1, 14, 1, 14, 1, 14, 3, 14, 99, 8, 14, 1, 15, 4, 15, 102, 8, 15, 11, 15,
+		12, 15, 103, 1, 15, 1, 15, 1, 79, 0, 16, 1, 1, 3, 2, 5, 3, 7, 4, 9, 5,
+		11, 6, 13, 7, 15, 8, 17, 9, 19, 10, 21, 11, 23, 12, 25, 13, 27, 14, 29,
+		15, 31, 16, 1, 0, 4, 3, 0, 65, 90, 95, 95, 97, 122, 4, 0, 48, 57, 65, 90,
+		95, 95, 97, 122, 1, 0, 48, 57, 3, 0, 9, 10, 13, 13, 32, 32, 111, 0, 1,
+		1, 0, 0, 0, 0, 3, 1, 0, 0, 0, 0, 5, 1, 0, 0, 0, 0, 7, 1, 0, 0, 0, 0, 9,
+		1, 0, 0, 0, 0, 11, 1, 0, 0, 0, 0, 13, 1, 0, 0, 0, 0, 15, 1, 0, 0, 0, 0,
+		17, 1, 0, 0, 0, 0, 19, 1, 0, 0, 0, 0, 21, 1, 0, 0, 0, 0, 23, 1, 0, 0, 0,
+		0, 25, 1, 0, 0, 0, 0, 27, 1, 0, 0, 0, 0, 29, 1, 0, 0, 0, 0, 31, 1, 0, 0,
+		0, 1, 33, 1, 0, 0, 0, 3, 40, 1, 0, 0, 0, 5, 45, 1, 0, 0, 0, 7, 47, 1, 0,
+		0, 0, 9, 49, 1, 0, 0, 0, 11, 54, 1, 0, 0, 0, 13, 56, 1, 0, 0, 0, 15, 58,
+		1, 0, 0, 0, 17, 62, 1, 0, 0, 0, 19, 64, 1, 0, 0, 0, 21, 66, 1, 0, 0, 0,
+		23, 68, 1, 0, 0, 0, 25, 75, 1, 0, 0, 0, 27, 85, 1, 0, 0, 0, 29, 98, 1,
+		0, 0, 0, 31, 101, 1, 0, 0, 0, 33, 34, 5, 105, 0, 0, 34, 35, 5, 109, 0,
+		0, 35, 36, 5, 112, 0, 0, 36, 37, 5, 111, 0, 0, 37, 38, 5, 114, 0, 0, 38,
+		39, 5, 116, 0, 0, 39, 2, 1, 0, 0, 0, 40, 41, 5, 102, 0, 0, 41, 42, 5, 114,
+		0, 0, 42, 43, 5, 111, 0, 0, 43, 44, 5, 109, 0, 0, 44, 4, 1, 0, 0, 0, 45,
+		46, 5, 44, 0, 0, 46, 6, 1, 0, 0, 0, 47, 48, 5, 61, 0, 0, 48, 8, 1, 0, 0,
+		0, 49, 50, 5, 104, 0, 0, 50, 51, 5, 101, 0, 0, 51, 52, 5, 108, 0, 0, 52,
+		53, 5, 109, 0, 0, 53, 10, 1, 0, 0, 0, 54, 55, 5, 123, 0, 0, 55, 12, 1,
+		0, 0, 0, 56, 57, 5, 125, 0, 0, 57, 14, 1, 0, 0, 0, 58, 59, 5, 107, 0, 0,
+		59, 60, 5, 56, 0, 0, 60, 61, 5, 115, 0, 0, 61, 16, 1, 0, 0, 0, 62, 63,
+		5, 58, 0, 0, 63, 18, 1, 0, 0, 0, 64, 65, 5, 91, 0, 0, 65, 20, 1, 0, 0,
+		0, 66, 67, 5, 93, 0, 0, 67, 22, 1, 0, 0, 0, 68, 72, 7, 0, 0, 0, 69, 71,
+		7, 1, 0, 0, 70, 69, 1, 0, 0, 0, 71, 74, 1, 0, 0, 0, 72, 70, 1, 0, 0, 0,
+		72, 73, 1, 0, 0, 0, 73, 24, 1, 0, 0, 0, 74, 72, 1, 0, 0, 0, 75, 79, 5,
+		34, 0, 0, 76, 78, 9, 0, 0, 0, 77, 76, 1, 0, 0, 0, 78, 81, 1, 0, 0, 0, 79,
+		80, 1, 0, 0, 0, 79, 77, 1, 0, 0, 0, 80, 82, 1, 0, 0, 0, 81, 79, 1, 0, 0,
+		0, 82, 83, 5, 34, 0, 0, 83, 26, 1, 0, 0, 0, 84, 86, 7, 2, 0, 0, 85, 84,
+		1, 0, 0, 0, 86, 87, 1, 0, 0, 0, 87, 85, 1, 0, 0, 0, 87, 88, 1, 0, 0, 0,
+		88, 28, 1, 0, 0, 0, 89, 90, 5, 116, 0, 0, 90, 91, 5, 114, 0, 0, 91, 92,
+		5, 117, 0, 0, 92, 99, 5, 101, 0, 0, 93, 94, 5, 102, 0, 0, 94, 95, 5, 97,
+		0, 0, 95, 96, 5, 108, 0, 0, 96, 97, 5, 115, 0, 0, 97, 99, 5, 101, 0, 0,
+		98, 89, 1, 0, 0, 0, 98, 93, 1, 0, 0, 0, 99, 30, 1, 0, 0, 0, 100, 102, 7,
+		3, 0, 0, 101, 100, 1, 0, 0, 0, 102, 103, 1, 0, 0, 0, 103, 101, 1, 0, 0,
+		0, 103, 104, 1, 0, 0, 0, 104, 105, 1, 0, 0, 0, 105, 106, 6, 15, 0, 0, 106,
+		32, 1, 0, 0, 0, 6, 0, 72, 79, 87, 98, 103, 1, 6, 0, 0,
+	}
+	deserializer := antlr.NewATNDeserializer(nil)
+	staticData.atn = deserializer.Deserialize(staticData.serializedATN)
+	atn := staticData.atn
+	staticData.decisionToDFA = make([]*antlr.DFA, len(atn.DecisionToState))
+	decisionToDFA := staticData.decisionToDFA
+	for index, state := range atn.DecisionToState {
+		decisionToDFA[index] = antlr.NewDFA(state, index)
 	}
 }
 
+// EphaLexerInit initializes any static state used to implement EphaLexer. By default the
+// static state used to implement the lexer is lazily initialized during the first call to
+// NewEphaLexer(). You can call this function if you wish to initialize the static state ahead
+// of time.
+func EphaLexerInit() {
+	staticData := &EphaLexerLexerStaticData
+	staticData.once.Do(ephalexerLexerInit)
+}
+
+// NewEphaLexer produces a new lexer instance for the optional input antlr.CharStream.
 func NewEphaLexer(input antlr.CharStream) *EphaLexer {
-
+	EphaLexerInit()
 	l := new(EphaLexer)
-
 	l.BaseLexer = antlr.NewBaseLexer(input)
-	l.Interpreter = antlr.NewLexerATNSimulator(l, lexerAtn, lexerDecisionToDFA, antlr.NewPredictionContextCache())
-
-	l.channelNames = lexerChannelNames
-	l.modeNames = lexerModeNames
-	l.RuleNames = lexerRuleNames
-	l.LiteralNames = lexerLiteralNames
-	l.SymbolicNames = lexerSymbolicNames
+	staticData := &EphaLexerLexerStaticData
+	l.Interpreter = antlr.NewLexerATNSimulator(l, staticData.atn, staticData.decisionToDFA, staticData.PredictionContextCache)
+	l.channelNames = staticData.ChannelNames
+	l.modeNames = staticData.ModeNames
+	l.RuleNames = staticData.RuleNames
+	l.LiteralNames = staticData.LiteralNames
+	l.SymbolicNames = staticData.SymbolicNames
 	l.GrammarFileName = "Epha.g4"
 	// TODO: l.EOF = antlr.TokenEOF
 
